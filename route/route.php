@@ -5,7 +5,7 @@ Route::miss(function () {
         'message' => 'url not found'
     ], 404);
 });
-Route::post('/hook', function () {
+Route::get('/hook', function () {
     return 334455;
     $s1 = $_SERVER['HTTP_X_HUB_SIGNATURE'];
     $s2 = 'sha1=' . hash_hmac('sha1', file_get_contents('php://input'), $_ENV['GITHUB_WEBHOOK_SECRET']);
