@@ -21,6 +21,7 @@ Route::post('/github_webhook', function () {
     }
 });
 
+
 Route::get('banner/one', 'api/BannerController/one');
 Route::get('category/all', 'api/CategoryController/all');
 Route::get('product/one', 'api/ProductController/one');
