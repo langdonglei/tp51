@@ -16,8 +16,9 @@ Route::post('/github_webhook', function () {
         fclose($pipes[1]);
         fclose($pipes[2]);
         proc_close($proc);
+    } else {
+        return 'error';
     }
-    return 'noo';
 });
 Route::get('banner/one', 'api/BannerController/one');
 Route::get('category/all', 'api/CategoryController/all');
