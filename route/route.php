@@ -6,9 +6,9 @@ Route::miss(function () {
     ], 404);
 });
 Route::post('/github_webhook', function () {
-//    $s1 = $_SERVER['HTTP_X_HUB_SIGNATURE'];
-//    $s2 = 'sha1=' . hash_hmac('sha1', file_get_contents('php://input'), Env::get('GITHUB_WEBHOOK_SECRET'));
-//    if ($s1 == $s2) {
+    $s1 = $_SERVER['HTTP_X_HUB_SIGNATURE'];
+    $s2 = 'sha1=' . hash_hmac('sha1', file_get_contents('php://input'), Env::get('GITHUB_WEBHOOK_SECRET'));
+    if ($s1 == $s2) {
 //        $path = Env::get('root_path');
 //        $proc = proc_open("cd $path && git pull", [1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes);
 //        echo stream_get_contents($pipes[1]);
@@ -16,13 +16,13 @@ Route::post('/github_webhook', function () {
 //        fclose($pipes[1]);
 //        fclose($pipes[2]);
 //        proc_close($proc);
-//
-//    }
+        return 'ok';
+    }
 //    return json([
 //        'code'    => 1,
 //        'message' => 'ok'
 //    ], 200);
-    return 123444555666111111;
+    return 'no';
 });
 Route::get('banner/one', 'api/BannerController/one');
 Route::get('category/all', 'api/CategoryController/all');
