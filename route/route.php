@@ -16,13 +16,13 @@ Route::post('/github_webhook', function () {
 //        fclose($pipes[1]);
 //        fclose($pipes[2]);
 //        proc_close($proc);
-        return 'ok';
+        return 'ok1';
     }
 //    return json([
 //        'code'    => 1,
 //        'message' => 'ok'
 //    ], 200);
-    return 'no';
+    return 'no1';
 });
 Route::get('banner/one', 'api/BannerController/one');
 Route::get('category/all', 'api/CategoryController/all');
