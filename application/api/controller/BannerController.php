@@ -12,8 +12,6 @@ class BannerController extends Controller
 {
     public function one($id)
     {
-        $a = new \PDO('pgsql:host=47.244.119.64;dbname=postgres','postgres','postgres');
-        var_dump($a);die;
         $data = [
             'id' => input('id')
         ];
