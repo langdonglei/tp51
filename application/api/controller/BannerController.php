@@ -6,12 +6,14 @@ namespace app\api\controller;
 
 use app\api\model\Banner;
 use app\api\validate\IDValidate;
+use think\Db;
 
 class BannerController extends Controller
 {
     public function one($id)
     {
-        echo 333;die;
+        $a = new \PDO('pgsql:host=47.244.119.64;dbname=postgres','postgres','postgres');
+        var_dump($a);die;
         $data = [
             'id' => input('id')
         ];
