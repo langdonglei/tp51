@@ -11,6 +11,7 @@ class BannerController extends Controller
 {
     public function one($id)
     {
+        echo 333;die;
         $data = [
             'id' => input('id')
         ];
