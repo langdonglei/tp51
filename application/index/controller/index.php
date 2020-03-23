@@ -21,7 +21,8 @@ class index
             $info = $file->move('static/image');
             if ($info) {
                 Image::create([
-                    'url' => $info->getSaveName()
+                    'type' => 1,
+                    'url'  => $info->getSaveName()
                 ]);
                 echo 'ok';
             } else {
