@@ -7,7 +7,7 @@ namespace app\index\controller;
 use app\api\model\Image;
 use think\facade\Request;
 
-class index
+class Index
 {
     public function index()
     {
