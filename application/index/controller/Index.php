@@ -20,10 +20,15 @@ class Index
         foreach ($files as $file) {
             $info = $file->move('static/image');
             if ($info) {
-                Image::create([
-                    'type' => 1,
-                    'url'  => $info->getSaveName()
-                ]);
+//                Image::create([
+//                    'type' => 1,
+//                    'url'  => $info->getSaveName()
+//                ]);
+                $m = new Image();
+                $m->type = 1;
+                $m->url = $info->getSaveName();
+                $m->save();
+                echo $m->create_at;
                 echo 'ok';
             } else {
 
