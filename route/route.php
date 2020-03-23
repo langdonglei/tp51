@@ -6,13 +6,8 @@ Route::miss(function () {
     ], 404);
 });
 Route::post('/github_webhook', function () {
-    echo $_SERVER['HTTP_X_HUB_SIGNATURE'];
-    echo env('GITHUB_WEBHOOK_SECRET');
-    echo '=';
-    echo env('github_webhook_secret');
-    die;
     $s1 = $_SERVER['HTTP_X_HUB_SIGNATURE'];
-    $s2 = 'sha1=' . hash_hmac('sha1', file_get_contents('php://input'), Env::get('GITHUB_WEBHOOK_SECRET'));
+    $s2 = 'sha1=' . hash_hmac('sha1', file_get_contents('php://input'), Env::get('github_webhook_secret'));
     if ($s1 == $s2) {
         $path = Env::get('root_path');
         $proc = proc_open("cd $path && git pull", [1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes);
