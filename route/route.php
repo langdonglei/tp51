@@ -10,7 +10,7 @@ Route::post('/github_webhook', function () {
     $s2 = 'sha1=' . hash_hmac('sha1', file_get_contents('php://input'), Env::get('github_webhook_secret'));
     if ($s1 == $s2) {
         $path = Env::get('root_path');
-        $proc = proc_open("cd $path && git reset --hard && git pull", [1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes);
+        $proc = proc_open("cd $path && git reset --hard && chmod -R 777 ./git && git pull", [1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes);
         echo stream_get_contents($pipes[1]);
         echo stream_get_contents($pipes[2]);
         fclose($pipes[1]);
