@@ -18,7 +18,7 @@ class index
     {
         $files = Request::file('files');
         foreach ($files as $file) {
-            $info = $file->move('image');
+            $info = $file->move('static/image');
             if ($info) {
                 Image::create([
                     'url' => $info->getSaveName()
