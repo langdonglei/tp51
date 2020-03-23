@@ -8,7 +8,7 @@ Route::miss(function () {
 Route::post('/github_webhook', function () {
     echo Env::get('GITHUB_WEBHOOK_SECRET');
     echo '=';
-    echo Env::get('github_webhook_secret');
+    echo Env::get('github_webhook_secret');die;
     $s1 = $_SERVER['HTTP_X_HUB_SIGNATURE'];
     $s2 = 'sha1=' . hash_hmac('sha1', file_get_contents('php://input'), Env::get('GITHUB_WEBHOOK_SECRET'));
     if ($s1 == $s2) {
