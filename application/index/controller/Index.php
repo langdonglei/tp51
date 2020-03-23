@@ -26,6 +26,7 @@ class Index
                 ]);
                 echo 'ok';
             } else {
+
                 echo $file->getError();
             }
         }
