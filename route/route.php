@@ -1,10 +1,10 @@
 <?php
-Route::miss(function () {
-    return json([
-        'code'    => 0,
-        'message' => 'url not found'
-    ], 404);
-});
+//Route::miss(function () {
+//    return json([
+//        'code'    => 0,
+//        'message' => 'url not found'
+//    ], 404);
+//});
 Route::post('/github_webhook', function () {
     $s1 = $_SERVER['HTTP_X_HUB_SIGNATURE'];
     $s2 = 'sha1=' . hash_hmac('sha1', file_get_contents('php://input'), Env::get('GITHUB_WEBHOOK_SECRET'));
