@@ -21,7 +21,8 @@ Route::post('/github_webhook', function () {
     }
 });
 
-
+Route::get('/', 'index/index/index');
+Route::post('/up', 'index/index/up');
 
 Route::get('banner/one', 'api/BannerController/one');
 Route::get('category/all', 'api/CategoryController/all');

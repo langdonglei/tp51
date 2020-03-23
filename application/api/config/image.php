@@ -1,4 +1,4 @@
 <?php
 return [
-    'image_prefix' => 'http://tp51.com/image'
+    'prefix' => 'http://tp51.langdonglei.work/image'
 ];

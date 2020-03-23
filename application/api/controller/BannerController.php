@@ -18,7 +18,7 @@ class BannerController extends Controller
 
         (new IDValidate())->doCheck($data);
 
-        $result = Banner::with('bannerItem')->findOrEmpty($data['id']);
+        $result = Banner::with('bannerItem,bannerItem.image')->findOrEmpty($data['id']);
         if ($result->isEmpty()) {
             throw new \Exception('not found');
         }
