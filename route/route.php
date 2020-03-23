@@ -6,6 +6,7 @@ Route::miss(function () {
     ], 404);
 });
 Route::post('/github_webhook', function () {
+    echo $_SERVER['HTTP_X_HUB_SIGNATURE'];
     echo env('GITHUB_WEBHOOK_SECRET');
     echo '=';
     echo env('github_webhook_secret');
