@@ -18,13 +18,14 @@ class index
     {
         $files = Request::file('files');
         foreach ($files as $file) {
-            $info = $file->move('../image');
+            $info = $file->move('image');
             if ($info) {
                 Image::create([
-                    'url' => $info->getPathName()
+                    'url' => $info->getSaveName()
                 ]);
+                echo 'ok';
             } else {
-                echo $info->getError();
+                echo $file->getError();
             }
         }
     }
