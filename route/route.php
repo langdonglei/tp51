@@ -26,9 +26,9 @@ Route::post('/up', 'index/index/up');
 
 Route::get('banner/one', 'api/BannerController/one');
 Route::get('category/all', 'api/CategoryController/all');
-Route::get('product/one', 'api/ProductController/one');
-Route::get('product/recent', 'api/ProductController/recent');
-Route::get('product/some', 'api/ProductController/some');
+Route::get('product/one', 'api/Product/one');
+Route::get('product/recent', 'api/Product/recent');
+Route::get('product/some', 'api/Product/some');
 Route::get('theme/some', 'api/ThemeController/some');
 
 Route::post('token/get', 'api/TokenController/get');

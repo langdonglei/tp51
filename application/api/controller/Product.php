@@ -4,13 +4,11 @@
 namespace app\api\controller;
 
 
-use app\api\model\Product;
-use app\api\model\ProductProperty;
 use app\api\validate\CategoryIDValidate;
 use app\api\validate\CountValidate;
 use app\api\validate\IDValidate;
 
-class ProductController extends Controller
+class Product extends Controller
 {
     public function one()
     {
@@ -18,8 +16,10 @@ class ProductController extends Controller
 
         (new IDValidate())->doCheck($data);
 
-        $result = Product::with([
-            'productProperty', 'productImage' => function ($query) {
+        $result = \app\api\model\Product::with([
+            'image',
+            'productProperty',
+            'productImage' => function ($query) {
                 $query->with('image')->order('order', 'asc');
             }
         ])->findOrEmpty($data['id']);
@@ -36,7 +36,7 @@ class ProductController extends Controller
 
         (new CountValidate)->doCheck($data);
 
-        $result = Product::limit($count)->order('create_at', 'desc')->select();
+        $result = \app\api\model\Product::with('image')->order('create_time', 'desc')->limit($count)->select();
         if ($result->isEmpty()) {
             throw new \Exception('not found');
         }
@@ -50,7 +50,7 @@ class ProductController extends Controller
 
         (new CategoryIDValidate())->doCheck($data);
 
-        $result = Product::where('category_id', $category_id)->select();
+        $result = \app\api\model\Product::where('category_id', $category_id)->select();
         if ($result->isEmpty()) {
             throw new \Exception('not found');
         }

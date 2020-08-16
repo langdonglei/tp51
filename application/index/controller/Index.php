@@ -28,7 +28,7 @@ class Index
                 $m->type = 1;
                 $m->url = $info->getSaveName();
                 $m->save();
-                echo $m->create_at;
+
                 echo 'ok';
             } else {
 

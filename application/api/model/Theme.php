@@ -6,6 +6,8 @@ namespace app\api\model;
 
 class Theme extends Model
 {
+    protected $visible = ['id','title'];
+
     public function topImage()
     {
         return parent::belongsTo(Image::class, 'top_image_id');

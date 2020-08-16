@@ -6,7 +6,7 @@ namespace app\api\model;
 
 class BannerItem extends Model
 {
-    protected $visible = ['image'];
+    protected $visible = ['id','image'];
     public function banner()
     {
         return parent::belongsTo(Banner::class);

@@ -15,7 +15,7 @@ class ThemeController extends Controller
 
         (new IDSValidate)->doCheck($data);
 
-        $result = Theme::with('topImage,headImage,product')->select($ids);;
+        $result = Theme::with('topImage,headImage,product,product.image')->select($ids);;
         if ($result->isEmpty()) {
             throw new \Exception('not found');
         }

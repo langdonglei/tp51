@@ -31,11 +31,7 @@ class OrderService
 
     public static function makeOrderNumber()
     {
-        return date('y')
-            . date('m')
-            . date('d')
-            . time()
-            . substr(microtime(), 2, 6);
+        return date('y') . date('m') . date('d') . time() . substr(microtime(), 2, 6);
     }
 
     private static function getDataFromDatabase($order)

@@ -6,6 +6,12 @@ namespace app\api\model;
 
 class Product extends Model
 {
+    protected $visible = ['id', 'title', 'price', 'stock'];
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
 
     public function productProperty()
     {
