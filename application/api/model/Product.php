@@ -1,31 +1,29 @@
 <?php
 
-
 namespace app\api\model;
 
+use think\Model;
 
 class Product extends Model
 {
-    protected $visible = ['id', 'title', 'price', 'stock'];
-
-    public function image()
+    public function coverImage()
     {
         return $this->belongsTo(Image::class);
     }
 
-    public function productProperty()
+    public function detailImages()
     {
-        return parent::hasMany(ProductProperty::class);
+        return $this->hasMany(Image::class);
     }
 
-    public function productImage()
+    public function productProperty()
     {
-        return parent::hasMany(ProductImage::class);
+        return $this->hasMany(ProductProperty::class);
     }
 
     public function theme()
     {
-        return parent::belongsToMany(Theme::class, 'product_theme_pivot');
+        return $this->belongsToMany(Theme::class, 'product_theme_pivot');
     }
 
 

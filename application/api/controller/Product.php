@@ -4,57 +4,46 @@
 namespace app\api\controller;
 
 
-use app\api\validate\CategoryIDValidate;
-use app\api\validate\CountValidate;
-use app\api\validate\IDValidate;
+use app\api\model\Product as Model;
+use think\Controller;
 
 class Product extends Controller
 {
-    public function one()
+    protected $failException = true;
+
+    public function getOneById()
     {
-        $data = ['id' => input('id')];
-
-        (new IDValidate())->doCheck($data);
-
-        $result = \app\api\model\Product::with([
-            'image',
-            'productProperty',
-            'productImage' => function ($query) {
-                $query->with('image')->order('order', 'asc');
-            }
-        ])->findOrEmpty($data['id']);
-        if ($result->isEmpty()) {
-            throw new \Exception('not found');
-        }
-
-        return $result;
+        $this->validate($this->request->get(), [
+            'id' => 'require|integer',
+        ]);
+        return json(
+            Model
+                ::getOrFail(input('id', 1))
+        );
     }
 
-    public function recent($count = 15)
+    public function getAllByCount()
     {
-        $data = ['count' => input('count')];
-
-        (new CountValidate)->doCheck($data);
-
-        $result = \app\api\model\Product::with('image')->order('create_time', 'desc')->limit($count)->select();
-        if ($result->isEmpty()) {
-            throw new \Exception('not found');
-        }
-
-        return $result;
+        $this->validate($this->request->get(), [
+            'count' => 'require|integer|max,15'
+        ]);
+        return json(
+            Model
+                ::limit(input('count'))
+                ->all()
+        );
     }
 
-    public function some($category_id)
+    public function getAllByGid()
     {
-        $data = ['category_id' => input('category_id')];
-
-        (new CategoryIDValidate())->doCheck($data);
-
-        $result = \app\api\model\Product::where('category_id', $category_id)->select();
-        if ($result->isEmpty()) {
-            throw new \Exception('not found');
-        }
-
-        return $result;
+        $this->validate($this->request->get(), [
+            'gid' => 'require|integer'
+        ]);
+        return json(
+            Model
+                ::with('coverImage,detailImages')
+                ->where('group_id', input('gid'))
+                ->all()
+        );
     }
 }

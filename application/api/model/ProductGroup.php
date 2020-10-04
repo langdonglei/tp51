@@ -4,15 +4,8 @@
 namespace app\api\model;
 
 
-class Category extends Model
-{
-    public function image()
-    {
-        return parent::belongsTo(Image::class);
-    }
+use think\Model;
 
-    public function getUrlAttr($value, $data)
-    {
-        return parent::setUrlPrefix($value, $data);
-    }
+class ProductGroup extends Model
+{
 }

@@ -4,7 +4,9 @@
 namespace app\api\model;
 
 
-class BannerGroup
+use think\Model;
+
+class BannerGroup extends Model
 {
 
 }

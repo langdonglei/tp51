@@ -1,35 +1,25 @@
 <?php
 
 
-namespace app\api\controller\v1;
+namespace app\api\controller;
 
-use app\api\controller\Controller;
+use app\api\model\Banner as Model;
+use think\Controller;
 
 class Banner extends Controller
 {
     protected $failException = true;
 
-    public function get()
+    public function getAllByGid()
     {
         $this->validate($this->request->get(), [
-            'id' => 'require',
+            'gid' => 'require',
         ]);
-
-        $r = \app\api\model\Banner::getOrFail(input('id'));
-        var_dump($r);
-        echo 333;
+        return json(
+            Model
+                ::with('image')
+                ->where('group_id', input('gid'))
+                ->all()
+        );
     }
-
-
-
-
-//        (new IDValidate())->doCheck($data);
-
-//        $result = Banner::with('bannerItem,bannerItem.image')->findOrEmpty($data['id']);
-//        if ($result->isEmpty()) {
-//            throw new \Exception('not found');
-//        }
-
-//        return $result;
-//}
 }

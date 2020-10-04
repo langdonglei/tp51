@@ -4,11 +4,12 @@
 namespace app\api\model;
 
 
+use think\Model;
+
 class Banner extends Model
 {
-    public function bannerItem()
+    public function image()
     {
-        return parent::hasMany(BannerItem::class);
+        return $this->belongsTo(Image::class);
     }
-
 }

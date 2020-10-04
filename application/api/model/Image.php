@@ -4,12 +4,8 @@
 namespace app\api\model;
 
 
+use think\Model;
+
 class Image extends Model
 {
-    protected $visible = ['url'];
-
-    public function getUrlATTR($value, $data)
-    {
-        return parent::setUrlPrefix($value, $data);
-    }
 }
