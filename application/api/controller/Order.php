@@ -4,20 +4,13 @@
 namespace app\api\controller;
 
 
-use app\api\service\OrderService;
-use app\api\validate\OrderValidate;
+use app\api\model\Snap;
+use Exception;
 use think\Controller;
 
 class Order extends Controller
 {
-    public function create()
-    {
+    protected $failException = true;
 
 
-
-
-        OrderService::handle();
-
-
-    }
 }
