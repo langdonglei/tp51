@@ -4,41 +4,44 @@
 namespace app\api\model;
 
 
+use think\Db;
 use think\Model;
 
 class Order extends Model
 {
-
-    public static function saveGetId($snap)
+    public function handle($data)
     {
-        self::checkStock($snap);
-        $model = new self();
-        $model->sn = self::generateSn();
-        $model->save();
-        return $model->id;
+        self::check($data);
+        $order = new self();
+        $order->sn = self::generateSn();
+        $order->save();
+        foreach ($data as &$item) {
+            $item['order_id'] = $order->id;
+        }
+        Db::insertAll($data);
     }
 
-    private static function checkStock($snap)
+    private static function check($data)
     {
-        $data = Product::all(array_column($snap, 'product_id'));
-        foreach ($snap as $order) {
+        $products = Product::all(array_column($data, 'product_id'));
+        foreach ($data as $item) {
             $index = -1;
-            for ($i = 0; $i < count($data); $i++) {
-                if ($order['product_id'] == $data[$i]['id']) {
+            for ($i = 0; $i < count($products); $i++) {
+                if ($item['product_id'] == $products[$i]['id']) {
                     $index = $i;
                 }
             }
             if ($index == -1) {
                 throw new \Exception('非法订单');
             } else {
-                if ($order['count'] > $data[$index]['stock']) {
-                    throw new \Exception($data[$index]['name'] . '缺货');
+                if ($item['count'] > $products[$index]['stock']) {
+                    throw new \Exception($products[$index]['name'] . '缺货');
                 }
             }
         }
     }
 
-    private static function generateSn()
+    private function generateSn()
     {
         $str = ['A', 'B', 'C', 'D', 'E', 'F'][date('Y') - 2020]
             . dechex(date('m'))
